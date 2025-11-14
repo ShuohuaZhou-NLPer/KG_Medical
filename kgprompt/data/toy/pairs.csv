@@ -1,7 +1,0 @@
-pair_id,drug_id,protein_id,label,relation
-P0001,D0001,T0001,7.2,binds
-P0002,D0002,T0002,6.3,binds
-P0003,D0003,T0003,5.1,binds
-P0004,D0001,T0002,6.1,interacts_with
-P0005,D0002,T0003,5.7,interacts_with
-P0006,D0003,T0001,6.8,interacts_with
