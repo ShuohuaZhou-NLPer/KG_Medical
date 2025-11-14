@@ -1,0 +1,7 @@
+head,relation,tail
+D0001,binds,T0001
+D0002,binds,T0002
+D0003,binds,T0003
+D0001,interacts_with,T0002
+D0002,interacts_with,T0003
+D0003,interacts_with,T0001

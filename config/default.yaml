@@ -1,0 +1,52 @@
+# Default experiment config for KGPrompt-DTA
+
+exp_name: "default"
+
+seed: 42
+device: "cuda"  # or "cpu"
+
+data:
+  root: "data/toy"
+  drugs_csv: "data/toy/drugs.csv"
+  proteins_csv: "data/toy/proteins.csv"
+  pairs_csv: "data/toy/pairs.csv"
+  kg_triples: "data/toy/kg_triples.csv"
+  max_drug_nodes: 64
+  max_protein_len: 512
+  train_val_test_split: [0.8, 0.1, 0.1]
+  num_workers: 0
+
+model:
+  hidden_dim: 256
+  heads: 4
+  layers: 3
+  dropout: 0.1
+  prompt_tokens: 16
+  prompt_mode: "dynamic"  # one of: no, static, dynamic
+  peft: true              # freeze large backbones, train prompts/adapters/head
+  use_adapters: true
+  adapter_bottleneck: 64
+  pooling: "attn"         # attn | mean | cls
+
+  # KG embeddings
+  kg:
+    embedding_dim: 128
+    margin: 1.0          # margin for KG ranking loss
+    kg_loss_weight: 0.05 # set 0.0 to disable
+
+loss:
+  lambda_kg: 0.2   # KG–prompt consistency (Eq. 14)
+  lambda_nce: 0.1  # Contrastive guidance (Eq. 15)
+
+optim:
+  batch_size: 32
+  lr_backbone: 0.0003
+  lr_prompt: 0.001
+  weight_decay: 0.0001
+  max_epochs: 5
+  patience: 5
+
+logging:
+  out_dir: "runs/default"
+  log_every: 50
+  save_attention: true
